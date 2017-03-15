@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <script src="lib/vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" name="hello" value="" v-model="msg">
+    <p>{{reversedMessage}} <strong>{{date}}</strong></p>
+    <h2 v-if="isOk">yes</h2>
+    <h2 v-else>no</h2>
+    <template v-if="isOk">
+        <h1>title</h1><p>paragraph1</p><p>paragraph2</p>
+    </template>
+    <div v-if="Math.random() > 0.5">
+        now you see me.
+    </div>
+    <div v-else>
+        now you don't
+    </div>
+    <div v-show="true" class="lead">test v-show</div>
+    <ul>
+        <li v-for="(item, index) in lists">
+            <p>index: {{index}}</p>
+            <p>name: {{item.name}}</p>
+            <p>age: {{item.age}}</p>
+            <p>job: {{item.job}}</p>
+        </li>
+    </ul>
+    <ol>
+        <template v-for="(item, index) in lists">
+            <li>{{index}}</li>
+            <li>{{item.name}}</li>
+            <li>{{item.age}}</li>
+            <li>{{item.job}}</li>
+        </template>
+    </ol>
+    <div v-for="(value, key, index) in object">
+        <span>{{index}}</span>
+        <strong>{{key}}</strong>
+        <em>{{value}}</em>
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            <li v-for="n in 8"><a href="#">{{n}}</a></li>
+            <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+        </ul>
+    </nav>
+    <div>
+        <input type="text" v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="add a todo">
+        <ul>
+            <li is="todo-item" v-for="(todo, index) in todos" v-bind:title="todo" v-on:remove="todos.splice(index,1)"></li>
+        </ul>
+    </div>
+    <select v-model="selected">
+        <option value="beijing">beijing</option>
+        <option value="guangzhou">guangzhou</option>
+        <option value="shenzhen">shenzhen</option>
+        <option value="hangzhou">hangzhou</option>
+    </select>
+    <span>selected is: {{selected}}</span>
+</div>
+<script>
+    Vue.component('todo-item', {
+        template: '\
+        <li>\
+            {{title}}\
+            <button v-on:click="$emit(\'remove\')">X</button>\
+        </li>\
+        ',
+        props: ['title']
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'iloveyou',
+            lists: [
+                { name: 'Ann', age: 21, job: 'delivery' },
+                { name: 'John', age: 25, job: 'java' },
+                { name: 'Dean', age: 28, job: '.net' }
+            ],
+            object: {
+                firstname: 'li',
+                lastname: 'ping',
+                age: 24
+            },
+            date: new Date().getTime(),
+            isOk: false,
+            newTodoText: '',
+            todos: [
+                'Do the dishes',
+                'Take out the trash',
+                'Mow the lawn'
+            ],
+            selected: 'shanghai'
+        },
+        computed: {
+            reversedMessage: function () {
+                return this.msg.split('').reverse().join('');
+            }
+        },
+        methods: {
+            addNewTodo: function () {
+                this.todos.push(this.newTodoText);
+                this.newTodoText = '';
+            }
+        }
+    });
+</script>
+</body>
+</html>
