@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <script src="lib/vue/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <currency-input v-model="price"></currency-input>
+</div>
+<script>
+    Vue.component('currency-input', {
+        template: '\
+        <span>\
+        <input ref="input" v-bind:value="value" v-on:input="updateValue($event.target.value)" >\
+        </span>\
+        ',
+        props: ['value'],
+        methods: {
+            updateValue: function (value) {
+                var formattedValue = value
+                    .trim()
+                    .slice(0,value.indexOf('.') + 3)
+                if (formattedValue !== value) {
+                    this.$refs.input.value = formattedValue
+                }
+                this.$emit('input', Number(formattedValue))
+            }
+        }
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            price: 12
+        }
+       
+    });
+</script>
+</body>
+</html>
