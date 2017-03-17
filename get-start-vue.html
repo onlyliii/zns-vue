@@ -74,6 +74,12 @@
         <option value="hangzhou">hangzhou</option>
     </select>
     <span>selected is: {{selected}}</span>
+    <div>
+        <span v-for="(item, index) in arr" :key="index">
+            {{item}}
+        </span>
+        <button class="btn btn-success" @click="add()">添加</button>
+    </div>
 </div>
 <script>
     Vue.component('todo-item', {
@@ -107,7 +113,8 @@
                 'Take out the trash',
                 'Mow the lawn'
             ],
-            selected: 'shanghai'
+            selected: 'shanghai',
+            arr: ['apple', 'banana', 'tomato']
         },
         computed: {
             reversedMessage: function () {
@@ -118,6 +125,9 @@
             addNewTodo: function () {
                 this.todos.push(this.newTodoText);
                 this.newTodoText = '';
+            },
+            add: function () {
+                this.arr.push('pear');
             }
         }
     });
