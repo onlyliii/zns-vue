@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!--<script src="lib/jquery.js"></script>-->
+  <script src="lib/clipboard.min.js"></script>
+</head>
+<body>
+  <input type="text" name="user" value="pingasdasdasdas" id="inp1">
+  <input type="button" id="btn" data-clipboard-target="#inp1" value="按钮"></input>
+  <script>
+    new Clipboard('input')
+  </script>
+</body>
+</html>
