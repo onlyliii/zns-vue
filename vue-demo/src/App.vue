@@ -28,9 +28,6 @@ export default {
 </script>
 
 <style lang="scss">
-html, body {
-  overflow: hidden;
-}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,6 +35,7 @@ html, body {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  overflow: hidden;
 }
 
 h1, h2 {
