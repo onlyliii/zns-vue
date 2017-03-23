@@ -41,10 +41,10 @@ export default {
   },
   methods: {
     getData() {
-      axios.get('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E8%BF%85%E9%9B%B7aa&json=1&p=3&sid=1426_21126_17001_22160&req=2&bs=%E8%BF%85%E9%9B%B7&pbs=%E8%BF%85%E9%9B%B7app&csor=3&pwd=%E8%BF%85%E9%9B%B7a&cb=jQuery110203079330098597126_1490264649026&_=1490264649041')
+      axios.get('https://api.github.com/users/onlyliii')
       .then(function (response) {
-        console.log(response);
-      })
+        this.res = response;
+      }.bind(this))
       .catch(function (error) {
         console.log(error);
       });
